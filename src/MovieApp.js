@@ -11,6 +11,8 @@ function App() {
       )
     ).json();
 
+    console.log(json);
+
     setLoading(false);
     setMovies(json.data.movies);
   };
@@ -21,19 +23,25 @@ function App() {
 
   return (
     <div>
-      {movies.map((movie) => (
-        <div key={movie.id}>
-          <img src={movie.medium_cover_image} />
-          <h2>{movie.title}</h2>
-          <p>{movie.summary}</p>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <img src={movie.medium_cover_image} />
+              <h2>{movie.title}</h2>
+              <p>{movie.summary}</p>
 
-          <ul>
-            {movie.genres.map((g) => (
-              <li key={g}>{g}</li>
-            ))}
-          </ul>
+              <ul>
+                {movie.genres.map((g) => (
+                  <li key={g}>{g}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
